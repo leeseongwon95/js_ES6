@@ -1,0 +1,27 @@
+
+
+<p id="hello">안녕</p> 
+<button id="button">버튼</button>
+<script>
+
+    document.getElementById("button").addEventListener("click", ()=>{ // function과 기능은 동일, 조금 다른 점이 있음
+        작명();
+    })
+    
+    function 작명(파라미터){
+        document.getElementById('hello').innerHTML = 파라미터  // 1. html 변경
+    }
+    
+    var name = ['kim', 'park', 20] // array
+    name[0]; // 인덱싱
+    var name2 = {name : 'kim', age : 20}
+    name.age;
+    name[age];
+
+    [1,2,3,4].forEach(function(a){ // 반복되는 코드를 줄이고 싶을 때 array에서 자료하나씩 뽑을때 사용
+
+    });
+
+    
+
+</script>

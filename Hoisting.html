@@ -1,0 +1,207 @@
+<div style="display: none">모달창0</div>
+<div style="display: none">모달창1</div>
+<div style="display: none">모달창2</div>
+
+<button>버튼0</button>
+<button>버튼1</button>
+<button>버튼2</button>
+
+<script>
+
+    function 함수() {
+        var 이름 = 'kim';
+    }
+
+    if (true) {
+        let 이름 = 'park';
+    }
+
+    console.log(나이); // 아직 변수 선언 안했는데 먼저 출력하면 error : 변수 '나이' is not defined 이 떠야하는데 undefined 가 뜸 (변수를 선언만하고 할당되지 않았을때)
+
+    var 나이 = 30;  // 나이를 밑에다가 선언을 했음에도 불구하고 에러가 뜨지 않는 현상이 발생함
+
+    console.log(나이);
+
+    
+
+    /*
+
+    var 나이 = 28;  이렇게 선언을 하더라도 JS 는 
+
+    var 나이;
+
+    나이 = 30;
+
+    이런식으로 변수으 ㅣ선언을 변수 범위 맨위로 끌고오는현상을 호이스팅이라고함
+    자바스크립트 언어 자체가 이따구임
+
+    */
+
+    // 선언, 할당, 범위, 호이스팅
+
+    // 가끔 변수가 여러개 만들고 싶으면
+
+    // var 나이, 이름, 성별; // 가능
+    
+    // window 로 전역변수 만들기
+
+    window.이름 = '김'; // window 는 자바스크립트 기본 함수를 담은 {오브젝트} 이걸 더 권장하는 방식임
+
+    console.log(이름);
+    console.log(window.이름);
+
+    // 함수선언도 Hoisting 됨
+
+    /*
+    퀴즈
+    */
+
+
+    // 1
+    if (true) {
+        let a = 1;
+        var b = 2;
+        if (true) {
+            let b = 3;
+        }
+        console.log(b) // 2
+    }
+
+    // //2 
+    // 함수2(); // defined 
+    // function 함수2() {
+    //     console.log(안녕);
+    //     let 안녕 = "Hello!";
+    // };
+
+    // 함수실행을 함수 전에 해도 되나?  ㅇ ㅇ
+    // let 안녕 = '헬로' 전에 안녕 출력?
+    // let 안녕은 hoisting이 되는데 let , const 는 저런 행위가 금지 먹음 undefined 자동으로 할당이 안됨 (실수방지 변수)
+
+    //3
+    // 함수3(); // 함수가 아닌데요? 라고 에러 뜸
+    // var 함수3 = function() {
+    //     console.log(안녕);
+    //     var 안녕 = "Hello!";
+    // }
+
+    // function 함수(){} : 전부가 Hoisting 됨
+    // var 함수 = function(){} : 선언 부분만 Hoisting 됨
+
+    //4
+    let a4 = 1;
+    var 함수4 = function() {
+        a4 = 2;
+    } // 함수를 만들기만 했지 실행을 안했잖음 함수(); 하면 2가나옴
+    console.log(a4); // 1
+
+    //5
+    let a5 = 1;
+    var b5 = 2;
+    window.a5 = 3;
+    window.b5 = 4;
+    // b5 는 4가 나옴
+    // a5 는 1이 나옴 나랑 가장 가까운 범위를 사용함
+    console.log(a5 + b5); // 5
+
+
+    /*
+    
+    심화문제
+
+    콘솔창에 1초에 한번씩 1부터 5까지의 정수를 출력해주고 싶습니다. 
+
+    setTimeout(function() { console.log(1); }, 1000 ); 
+    setTimeout(function() { console.log(2); }, 2000 ); 
+    setTimeout(function() { console.log(3); }, 3000 ); 
+    setTimeout(function() { console.log(4); }, 4000 ); 
+    setTimeout(function() { console.log(5); }, 5000 ); 
+
+     1초마다 1~5까지의 숫자를 콘솔창에 출력해줍니다.
+
+    하지만 반복되는 코드가 보기 싫어서 반복문 안에 담았습니다. 
+
+    for (var i = 1; i < 6; i++) { 
+     setTimeout(function() { console.log(i); }, i*1000 ); 
+    }
+
+    논리적으로 완벽한 for 반복문입니다. 
+
+    그런데 반복문으로 축약하자마자 제대로 작동하지 않습니다. 
+
+    계속 5라는 숫자가 1초마다 출력되네요. 
+
+ 
+
+    Q. 위 코드는 왜 의도대로 동작하지 않는 것이죠? 설명해보십시오.
+
+    그리고 해결할 방법은 무엇일까요?
+    */
+
+    // var i = 5;  반복문이 다 실행되고 전역변수로 이렇게 남아있을거임
+
+    for (var i = 0; i < 5; i++) {
+        setTimeout(() => console.log(i), i * 1000) // console.log(i)가 바로 실행되는 코드가 아님 ex 1초후 2초후 ...
+        // 1~5초 후에 이코드를 실행하려고 i를 찾는데 전역변수 i 가 5임 범위자체가 function 이라
+    }
+
+
+    for (let i = 1; i < 6; i++) {
+        // let i = 0; 이렇게 중괄호안에 호이스팅이 일어남
+        setTimeout(() => console.log(i), i * 1000) // console.log(i)가 바로 실행되는 코드가 아님 ex 1초후 2초후 ...
+        // 범위자체가 {} 중괄호인 let 을 쓰면
+    }
+    /*
+    
+    심화문제 2
+    <div style="display : none">모달창0</div>
+    <div style="display : none">모달창1</div>
+    <div style="display : none">모달창2</div>
+
+    <button>버튼0</button>
+    <button>버튼1</button>
+    <button>버튼2</button>
+    
+    지금 display : none 덕분에 모달창이 아무것도 안보이는 상태입니다. 
+
+    자바스크립트를 잘 짜서
+
+    0번째 버튼을 누르면 0번째 모달창, 
+
+    1번째 버튼을 누르면 1번째 모달창을 보여주고 싶습니다. 
+
+    그럼 코드를 어떻게 짜면 될까요? 
+
+    */
+
+    var 버튼들 = document.querySelectorAll('button');
+    var 모달창들 = document.querySelectorAll('div');
+
+    // 버튼들[0].addEventListener('click', function(){
+    //     모달창들[0].style.display = 'block';
+    // });
+
+    // 버튼들[1].addEventListener('click', function(){
+    //     모달창들[1].style.display = 'block';
+    // });
+
+    // 버튼들[2].addEventListener('click', function(){
+    //     모달창들[2].style.display = 'block';
+    // });
+    
+
+    // 반복문
+
+    for (let i = 0; i < 3; i++) {
+        // let i 값이 여기로 들어와서 let 을 써야함 버그로 부터 자유롭고 싶으면 let 써야함
+        버튼들[i].addEventListener('click', function(){
+            모달창들[i].style.display = 'block';
+        });
+    };
+
+    // 1. 반복문 코드 3번 돌림
+    // 2. 근데 이벤트리스너 내부 코드는 나중에 실행함
+    // 3. 좀 있다가 버튼을 클릭하면 내부 코드 실행함
+    // 4. 이제 i값을 실제 숫자로 채우려고 봤더니 i = 3 밖에 없음 (반복문 다 돌고 남은 전역변수 i = 3)
+
+</script>
